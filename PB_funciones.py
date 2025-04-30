@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-import requests as req
+import requests
 
 # Función para añadir un nuevo libro a un diccionario determinado.
 # Se pasan como argumentos el diccionario y el código ISBN del libro.
@@ -9,7 +9,7 @@ def nuevo_libro (diccionario, codigo_isbn):
     # Se genera la consulta a través de una API
     isbn = codigo_isbn
     h = {'Authorization': "61066_f9ba2c2c66284291bfbe3153a53fdb85"} # ...............................Borrar API en entrega final!!!
-    response = req.get(f"https://api2.isbndb.com/book/{isbn}", headers= h)
+    response = requests.get(f"https://api2.isbndb.com/book/{isbn}", headers= h)
 
     # Si la conexión se ha validado, se añaden los datos del libro consultado al diccionario. En caso contrario se lanza un mensaje de error.
     if response.status_code == 200:
