@@ -19,28 +19,41 @@ def nuevo_libro (diccionario, clave):
 
     # Si la conexión se ha validado, se añaden los datos del libro consultado al diccionario. En caso contrario se lanza un mensaje de error.
     if respuesta.status_code == 200:
-        book_info_pre = respuesta.json().get("book", {})
+        book_info = respuesta.json().get("book", {})
         if type(clave) == int:
-            book_info = book_info_pre
-        if type(clave) == str:
-            book_info = book_info_pre[0]
-            
-        diccionario.update({
-            "ISBN": book_info.get("isbn13", ""),
-            "Título": book_info.get("title", ""),
-            "Autor": ", ".join(book_info.get("authors", [])),
-            "Editorial": book_info.get("publisher", ""),
-            "Páginas": book_info.get("pages", ""),
-            "Fecha de publicación": book_info.get("date_published", ""),
-            #"Subjects": ", ".join(book_info.get("subjects", [])),
-            #"Binding": book_info.get("binding", ""),
-            "Sinopsis": book_info.get("synopsis", ""),
-            "Lengua original": book_info.get("language", ""),
-            "Edición": book_info.get("edition", ""),
-            "Dimensiones": book_info.get("dimensions", ""),
-            #"MSRP": book_info.get("msrp", ""),
-            #"Image": book_info.get("image", ""),
-        })
+             diccionario.update({
+                 "ISBN": book_info.get("isbn13", ""),
+                 "Título": book_info.get("title", ""),
+                 "Autor": ", ".join(book_info.get("authors", [])),
+                 "Editorial": book_info.get("publisher", ""),
+                 "Páginas": book_info.get("pages", ""),
+                 "Fecha de publicación": book_info.get("date_published", ""),
+                 #"Subjects": ", ".join(book_info.get("subjects", [])),
+                 #"Binding": book_info.get("binding", ""),
+                 "Sinopsis": book_info.get("synopsis", ""),
+                 "Lengua original": book_info.get("language", ""),
+                 "Edición": book_info.get("edition", ""),
+                 "Dimensiones": book_info.get("dimensions", ""),
+                 #"MSRP": book_info.get("msrp", ""),
+                 #"Image": book_info.get("image", ""),
+             })
+        elif type(clave) == str:
+             diccionario.update({
+                 "ISBN": book_info[0].get("isbn13", ""),
+                 "Título": book_info[0].get("title", ""),
+                 "Autor": ", ".join(book_info[0].get("authors", [])),
+                 "Editorial": book_info[0].get("publisher", ""),
+                 "Páginas": book_info[0].get("pages", ""),
+                 "Fecha de publicación": book_info[0].get("date_published", ""),
+                 #"Subjects": ", ".join(book_info[0].get("subjects", [])),
+                 #"Binding": book_info[0].get("binding", ""),
+                 "Sinopsis": book_info[0].get("synopsis", ""),
+                 "Lengua original": book_info[0].get("language", ""),
+                 "Edición": book_info[0].get("edition", ""),
+                 "Dimensiones": book_info[0].get("dimensions", ""),
+                 #"MSRP": book_info[0].get("msrp", ""),
+                 #"Image": book_info[0].get("image", ""),
+             })
     else:
             print(f"Error de ISBN {isbn}: {respuesta.status_code}")
 
