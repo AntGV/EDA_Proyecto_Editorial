@@ -12,7 +12,7 @@ def nuevo_libro (diccionario, clave):
         isbn = clave
         h = {"Authorization": "61066_f9ba2c2c66284291bfbe3153a53fdb85"} # ...............................Borrar API en entrega final!!!
         respuesta = requests.get(f"https://api2.isbndb.com/book/{isbn}", headers= h)
-   if clave == str:
+    if clave == str:
         title = clave
         h = {"Authorization": "61066_f9ba2c2c66284291bfbe3153a53fdb85"} # ...............................Borrar API en entrega final!!!
         respuesta = requests.get(f"https://api2.isbndb.com/books/{title}?page=1&pageSize=1&column=title&shouldMatchAll=1", headers= h)
