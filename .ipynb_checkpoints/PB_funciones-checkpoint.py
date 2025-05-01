@@ -12,16 +12,18 @@ def nuevo_libro (diccionario, clave):
         isbn = clave
         h = {"Authorization": "61066_f9ba2c2c66284291bfbe3153a53fdb85"} # ...............................Borrar API en entrega final!!!
         respuesta = requests.get(f"https://api2.isbndb.com/book/{isbn}", headers= h)
-   if clave == str:
+    if clave == str:
         title = clave
         h = {"Authorization": "61066_f9ba2c2c66284291bfbe3153a53fdb85"} # ...............................Borrar API en entrega final!!!
         respuesta = requests.get(f"https://api2.isbndb.com/books/{title}?page=1&pageSize=1&column=title&shouldMatchAll=1", headers= h)
 
     # Si la conexión se ha validado, se añaden los datos del libro consultado al diccionario. En caso contrario se lanza un mensaje de error.
     if respuesta.status_code == 200:
-        book_info = respuesta.json().get("book", {})
+        book_info_pre = respuesta.json().get("book", {})
+        if clave == int:
+            book_info = book_info_pre
         if clave == str:
-            book_info = book_info[0]
+            book_info = book_info_pre[0]
             
         diccionario.update({
             "ISBN": book_info.get("isbn13", ""),
