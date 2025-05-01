@@ -19,9 +19,11 @@ def nuevo_libro (diccionario, clave):
 
     # Si la conexión se ha validado, se añaden los datos del libro consultado al diccionario. En caso contrario se lanza un mensaje de error.
     if respuesta.status_code == 200:
-        book_info = respuesta.json().get("book", {})
+        book_info_pre = respuesta.json().get("book", {})
+        if clave == int:
+            book_info = book_info_pre
         if clave == str:
-            book_info = book_info[0]
+            book_info = book_info_pre[0]
             
         diccionario.update({
             "ISBN": book_info.get("isbn13", ""),
