@@ -37,23 +37,24 @@ def nuevo_libro (diccionario, clave):
                  #"MSRP": book_info.get("msrp", ""),
                  #"Image": book_info.get("image", ""),
              })
-        elif type(clave) == str:
-             diccionario.update({
-                 "ISBN": book_info[0].get("isbn13", ""),
-                 "Título": book_info[0].get("title", ""),
-                 "Autor": ", ".join(book_info[0].get("authors", [])),
-                 "Editorial": book_info[0].get("publisher", ""),
-                 "Páginas": book_info[0].get("pages", ""),
-                 "Fecha de publicación": book_info[0].get("date_published", ""),
-                 #"Subjects": ", ".join(book_info[0].get("subjects", [])),
-                 #"Binding": book_info[0].get("binding", ""),
-                 "Sinopsis": book_info[0].get("synopsis", ""),
-                 "Lengua original": book_info[0].get("language", ""),
-                 "Edición": book_info[0].get("edition", ""),
-                 "Dimensiones": book_info[0].get("dimensions", ""),
-                 #"MSRP": book_info[0].get("msrp", ""),
-                 #"Image": book_info[0].get("image", ""),
-             })
+        elif respuesta.status_code == 200:
+            book_info = respuesta.json().get("books", {})
+            diccionario.update({
+                "ISBN": book_info[0].get("isbn13", ""),
+                "Título": book_info[0].get("title", ""),
+                "Autor": ", ".join(book_info[0].get("authors", [])),
+                "Editorial": book_info[0].get("publisher", ""),
+                "Páginas": book_info[0].get("pages", ""),
+                "Fecha de publicación": book_info[0].get("date_published", ""),
+                #"Subjects": ", ".join(book_info.get("subjects", [])),
+                #"Binding": book_info.get("binding", ""),
+                "Sinopsis": book_info[0].get("synopsis", ""),
+                "Lengua original": book_info[0].get("language", ""),
+                "Edición": book_info[0].get("edition", ""),
+                "Dimensiones": book_info[0].get("dimensions", ""),
+                #"MSRP": book_info.get("msrp", ""),
+                #"Image": book_info.get("image", ""),
+            })
     else:
             print(f"Error de ISBN {isbn}: {respuesta.status_code}")
 
