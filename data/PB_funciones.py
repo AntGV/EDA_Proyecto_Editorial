@@ -13,6 +13,15 @@ def titulo_rect (titulo):
         titulo_fin = titulo
     return titulo_fin
 
+def serie_rect (titulo):
+# Función que extrae la serie a partir del título. 
+    pos = titulo.index("(")
+    serie = titulo[pos:]
+    serie2 = serie.replace("(","")
+    serie3 = serie2.replace(")","")
+    serie_fin = serie3.strip()
+    return serie_fin
+
 def sales_rect (sales, lista):
 # Función que elimina símbolos de la columna sales. 
     for simbol in lista:

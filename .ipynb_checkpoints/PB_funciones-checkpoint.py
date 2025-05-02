@@ -5,19 +5,24 @@ import requests
 
 def titulo_rect (titulo):
 # Función que elimina el título original de la columna de títulos de libros. 
-    pos = titulo.index("(")
-    titulo_uni = titulo[:pos]
-    titulo_fin = titulo_uni.strip()
+    if "(" in elem:
+        pos = titulo.index("(")
+        titulo_uni = titulo[:pos]
+        titulo_fin = titulo_uni.strip()
+    else:
+        titulo_fin = titulo
     return titulo_fin
 
-def serie_rect (titulo):
-# Función que extrae la serie a partir del título. 
-    pos = titulo.index("(")
-    serie = titulo[pos:]
-    serie2 = serie.replace("(","")
-    serie3 = serie2.replace(")","")
-    serie_fin = serie3.strip()
-    return serie_fin
+def sales_rect (sales, lista):
+# Función que elimina símbolos de la columna sales. 
+    for simbol in lista:
+        if simbol in sales:
+            pos = sales.index(simbol)
+            sales_uni = sales[:pos]
+            sales_fin = sales_uni.strip()
+        else:
+            sales_fin = sales
+    return sales_fin
     
 def nuevo_libro (diccionario, clave):
 # Función para añadir un nuevo libro a un diccionario determinado.
