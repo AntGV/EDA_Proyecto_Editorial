@@ -3,6 +3,22 @@ import pandas as pd
 import requests
 
 
+def titulo_rect (titulo):
+# Función que elimina el título original de la columna de títulos de libros. 
+    pos = titulo.index("(")
+    titulo_uni = titulo[:pos]
+    titulo_fin = titulo_uni.strip()
+    return titulo_fin
+
+def serie_rect (titulo):
+# Función que extrae la serie a partir del título. 
+    pos = titulo.index("(")
+    serie = titulo[pos:]
+    serie2 = serie.replace("(","")
+    serie3 = serie2.replace(")","")
+    serie_fin = serie3.strip()
+    return serie_fin
+    
 def nuevo_libro (diccionario, clave):
 # Función para añadir un nuevo libro a un diccionario determinado.
 # Se pasan como argumentos el diccionario y el código ISBN del libro.
@@ -28,13 +44,13 @@ def nuevo_libro (diccionario, clave):
                  "Editorial": book_info.get("publisher", ""),
                  "Páginas": book_info.get("pages", ""),
                  "Fecha de publicación": book_info.get("date_published", ""),
-                 #"Subjects": ", ".join(book_info.get("subjects", [])),
-                 #"Binding": book_info.get("binding", ""),
+                 "Género": ", ".join(book_info.get("subjects", [])),
+                 "Formato": book_info.get("binding", ""),
                  "Sinopsis": book_info.get("synopsis", ""),
                  "Lengua original": book_info.get("language", ""),
                  "Edición": book_info.get("edition", ""),
                  "Dimensiones": book_info.get("dimensions", ""),
-                 #"MSRP": book_info.get("msrp", ""),
+                 "Precio": book_info.get("msrp", ""),
                  #"Image": book_info.get("image", ""),
              })
         elif respuesta.status_code == 200:
@@ -46,18 +62,17 @@ def nuevo_libro (diccionario, clave):
                 "Editorial": book_info[0].get("publisher", ""),
                 "Páginas": book_info[0].get("pages", ""),
                 "Fecha de publicación": book_info[0].get("date_published", ""),
-                #"Subjects": ", ".join(book_info.get("subjects", [])),
-                #"Binding": book_info.get("binding", ""),
+                "Género": ", ".join(book_info[0].get("subjects", [])),
+                "Formato": book_info[0].get("binding", ""),
                 "Sinopsis": book_info[0].get("synopsis", ""),
                 "Lengua original": book_info[0].get("language", ""),
                 "Edición": book_info[0].get("edition", ""),
                 "Dimensiones": book_info[0].get("dimensions", ""),
-                #"MSRP": book_info.get("msrp", ""),
+                "Precio": book_info[0].get("msrp", ""),
                 #"Image": book_info.get("image", ""),
             })
     else:
             print(f"Error de ISBN {isbn}: {respuesta.status_code}")
-
     return diccionario
     
 
@@ -91,7 +106,6 @@ def nuevo_libro_isbn (diccionario, codigo_isbn):
             })
     else:
             print(f"Error de ISBN {isbn}: {respuesta.status_code}")
-
     return diccionario
 
 
@@ -125,5 +139,4 @@ def nuevo_libro_titulo (diccionario, titulo):
             })
     else:
             print(f"Error de ISBN {isbn}: {respuesta.status_code}")
-
     return diccionario
