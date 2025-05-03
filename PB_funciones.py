@@ -5,7 +5,7 @@ import requests
 
 def titulo_rect (titulo):
 # Función que elimina el título original de la columna de títulos de libros. 
-    if "(" in elem:
+    if "(" in titulo:
         pos = titulo.index("(")
         titulo_uni = titulo[:pos]
         titulo_fin = titulo_uni.strip()
