@@ -11,6 +11,7 @@ def titulo_rect (titulo):
         titulo_fin = titulo_uni.strip()
     else:
         titulo_fin = titulo
+    titulo_fin = titulo_fin.upper()
     return titulo_fin
 
 def sales_rect (sales, lista):
@@ -32,6 +33,7 @@ def serie_extr (titulo):
         serie_uni = titulo[pos:]
         serie_uni = serie_uni.replace("(","")
         serie_uni = serie_uni.replace(")","")
+        serie_uni = serie_uni.replace(",","")
         serie_fin = serie_uni.strip()
     else:
         serie_fin = None
