@@ -92,5 +92,8 @@ def nuevo_libro (diccionario, clave):
             })
     else:
             print(f"Error de ISBN: {respuesta.status_code}")
+            if respuesta.status_code == 429:
+                print(clave)
+                break            
     return diccionario
 
