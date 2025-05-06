@@ -75,7 +75,7 @@ def nuevo_libro (diccionario, clave):
         elif type(clave) == str:
             book_info = respuesta.json().get("books", {})
             diccionario.update({
-                "ISBN": book_info.get("isbn13", ""),
+                "ISBN": book_info[0].get("isbn13", ""),
                 "Título": book_info[0].get("title", ""),
                 "Autor": ", ".join(book_info[0].get("authors", [])),
                 "Editorial": book_info[0].get("publisher", ""),
