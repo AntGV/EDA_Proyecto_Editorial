@@ -91,9 +91,9 @@ def nuevo_libro (diccionario, clave):
                 #"Image": book_info.get("image", ""),
             })
     else:
-            print(f"Error de ISBN: {respuesta.status_code}")
+            print(f"Error: {respuesta.status_code}")
             if respuesta.status_code == 429:
                 print(clave)
-                break            
+                return diccionario            
     return diccionario
 
